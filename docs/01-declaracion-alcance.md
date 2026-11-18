@@ -1,9 +1,3 @@
----
-
-### Archivo 2: `01-declaracion-alcance.md`
-*(Ubicación: `docs/01-declaracion-alcance.md`)*
-
-```markdown
 # 1. Declaración de Alcance
 
 | Módulo / Servicio | ¿Aplica? | Observación |
