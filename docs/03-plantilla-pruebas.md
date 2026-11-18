@@ -1,0 +1,20 @@
+# 3. Plantilla de Ejecución de Casos de Prueba
+
+**Cobertura:** 13 casos aplicables ejecutados (incluyendo flujos críticos y casos negativos).  
+**Tasa de aprobación:** 100% (13/13 Aprobados tras correcciones).
+
+| ID | Módulo | Descripción | Datos de entrada | Resultado esperado | Resultado obtenido | Estado | Evidencia |
+| :--- | :--- | :--- | :--- | :--- | :--- | :---: | :--- |
+| **CP-01** | Arranque | La app inicia sin errores | Ejecución en `localhost:8080` | Muestra pantalla `LoginScreen` sin excepciones | Se renderizó el formulario de inicio de sesión correctamente | Aprobado | `evidencias/capturas-aplicacion/01-validacion-login.png` |
+| **CP-02** | Autenticación | Registro e inicio de sesión válido | `prueba@utec.edu.sv` / `123456` | Crea usuario en Auth y navega a `HomeScreen` | Usuario creado en Firebase Auth y acceso concedido a Mis Tareas | Aprobado | `evidencias/firebase/01-auth-usuarios.png` |
+| **CP-03** | Autenticación | Inicio de sesión inválido (negativo) | `prueba@utec.edu.sv` / contraseña incorrecta | Mensaje de error claro en rojo; permanece en login | Mostró *"Credenciales incorrectas. Verifica tu correo y contraseña."* | Aprobado | `evidencias/capturas-aplicacion/02-error-credenciales.png` |
+| **CP-04** | Validación | Formulario vacío (negativo) | Campos de correo y contraseña vacíos | Muestra mensajes de validación; no llama a Firebase | Mostró *"El correo es obligatorio"* y *"La contraseña es obligatoria"* | Aprobado | `evidencias/capturas-aplicacion/01-validacion-login.png` |
+| **CP-05** | Navegación | Cambio entre Login y Registro | Clic en *"¿No tienes cuenta? Regístrate"* | Cambia título y botón a modo registro sin errores | Transición fluida entre estados de formulario | Aprobado | `evidencias/capturas-aplicacion/03-lista-vacia.png` |
+| **CP-06** | Navegación | Navegación post-autenticación | Autenticación exitosa | Redirige automáticamente mediante `authStateChanges()` | Apertura inmediata de `HomeScreen` sin pantallas intermedias rotas | Aprobado | `evidencias/capturas-aplicacion/03-lista-vacia.png` |
+| **CP-07** | Datos | Crear tarea | Título: `"Configurar Firebase Auth y Firestore"` | Aparece en la lista UI y se guarda en Firestore | Documento creado en colección `tasks` con `completed: false` | Aprobado | `evidencias/capturas-aplicacion/04-crud-tareas.png` |
+| **CP-08** | Datos | Leer lista de tareas | Sesión activa del usuario | Lista completa filtrada por `userId` | Se visualizan únicamente las tareas del usuario autenticado | Aprobado | `evidencias/firebase/02-firestore-datos.png` |
+| **CP-09** | Datos | Actualizar tarea | Clic en checkbox de tarea existente | Tacha el texto en UI y actualiza `completed: true` | Estado actualizado en tiempo real tanto en UI como en Firestore | Aprobado | `evidencias/capturas-aplicacion/04-crud-tareas.png` |
+| **CP-10** | Datos | Eliminar tarea | Clic en ícono eliminar (papelera roja) | Desaparece de la lista UI y se borra de Firestore | Registro eliminado correctamente de la colección `tasks` | Aprobado | `evidencias/firebase/02-firestore-datos.png` |
+| **CP-12** | Estados | Lista vacía inicial | Usuario nuevo sin registros | Muestra mensaje amigable sin error ni cierre | Mostró *"No hay tareas registradas aún."* | Aprobado | `evidencias/capturas-aplicacion/03-lista-vacia.png` |
+| **CP-18** | Sesión | Cerrar sesión | Clic en botón `"Salir"` (ícono logout) | Vuelve a `LoginScreen` ocultando datos privados | Sesión cerrada y redirección inmediata al formulario de acceso | Aprobado | `evidencias/capturas-aplicacion/01-validacion-login.png` |
+| **CP-20** | Flujo completo | Recorrido extremo a extremo (FC-01 a FC-04) | Registro → Crear → Completar → Salir | Todos los pasos se ejecutan sin errores en consola | Flujo completo validado de extremo a extremo con persistencia real | Aprobado | `evidencias/capturas-aplicacion/04-crud-tareas.png` |
